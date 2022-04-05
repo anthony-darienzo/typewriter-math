@@ -1,0 +1,409 @@
+\documentclass{./typewriter-math}
+\usepackage[margin=1in]{geometry}
+
+%\titlecolor{teal}
+\title{MATH 500}
+\subtitle{Problem Set 10}
+\author{Anthony D'Arienzo}
+%\contact{apd6@illinois.edu}
+\date{4 April 2022}
+
+\DeclareMathOperator\Ann{Ann}
+\DeclareMathOperator\rank{rank}
+\newcommand\tors{\text{tors}}
+
+\begin{document}
+	
+	\maketitle%
+
+	\begin{exercise}[(DF 12.1.6)]
+		Let \(R\) be an integral domain and \(M\) any non-principal ideal of \(R\)
+		such that \(M \neq \pwrap{0}\), considered as an \(R\)-module. Show that
+		(i) \(M\) is torsion free and (ii) \(\rank M = 1\), but (iii) \(M\) is not
+		a free module.
+
+		\begin{proof}[Proof of (i)]
+			Let \(x\) be an element of \(M\). Suppose \(r x = 0\), where \(r \neq
+			0\). Since \(R\) is an integral domain, this implies \(x = 0\) (\(M\) is
+			an ideal of \(R\), so \(x\) is an element of \(R\)). Thus, if \(x \in M\)
+			is torsion, then \(x = 0\): \(M_\tors = \bwrap{0}\).
+		\end{proof}
+
+		\begin{proof}[Proof of (ii)]
+			Let \(x,y\) be any two elements of \(M\). Then \(yx\) and \(xy\) are
+			elements of \(M\). Integral domains are commutative, so \(yx - xy = yx -
+			yx = 0\), so \(x\) and \(y\) are linearly dependent. Since \(x\) and
+			\(y\) are arbitrary, this shows that \(\rank M < 2\). Since \(M \neq
+			\pwrap{0}\), \(\rank M > 0\), so \(\rank M = 1\).
+		\end{proof}
+
+		\begin{proof}[Proof of (iii)]
+			Suppose, for the purpose of deriving a contradiction, that \(M\) were a
+			free module. Since the basis of a free module is always linearly
+			independent, and \(\rank M = 1\), the basis of \(M\) must be a single
+			element \(x_0 \in M\). That is, every element \(y\) of \(M\) is uniquely
+			equal to an expression of the form \(r x_0\) for some \(r \in R\). \(M\)
+			is an ideal of \(R\), so this implies \(M = \pwrap{x_0}\). Since \(M\) is
+			not principal, we have a contradiction. Therefore \(M\) is not free.
+		\end{proof}
+
+	\end{exercise}
+
+	\begin{exercise}[(DF 12.1.7)]
+		Let \(R\) be any ring, \(A_1,\ldots,A_m\) be \(R\)-modules, and \(B_k
+		\subseteq A_k\) submodules. Show that there is an isomorphism \(\pwrap{A_1 \oplus
+		\ldots \oplus A_m}/\pwrap{B_1 \oplus \ldots \oplus B_m} \cong
+		\pwrap{A_1/B_1} \oplus \ldots \oplus \pwrap{A_m/B_m}\) of modules.
+
+		\begin{proof}
+			Let \(M \eqdef \pwrap{A_1 \oplus \ldots \oplus A_m}/\pwrap{B_1 \oplus
+			\ldots \oplus B_m}\) and \(N \eqdef \pwrap{A_1/B_1} \oplus \ldots \oplus
+			\pwrap{A_m/B_m}\). Then \(N\) is the coproduct of the modules \(A_i/B_i\).
+			Therefore it suffices to show that \(M\) satisfies the universal property
+			of this coproduct. Suppose we have a family of morphishms \(f_i: A_i/B_i
+			\to X\) for \(i \in \bwrap{1,\ldots,m}\), where \(X\) is some
+			\(R\)-module. Let \(\pi_i: A_i \to A_i/B_i\) be the quotient morphism.
+			Then \(f_i \circ \pi_i : A_i \to X\) is a morphism of \(R\)-modules. The
+			universal property of \(A_1 \oplus \ldots \oplus A_m\) tells us that there
+			exists a unique morphism \(\hat{f}: A_1 \oplus \ldots \oplus A_m \to X\)
+			such that the following diagram commutes for all \(i \in
+			\bwrap{1,\ldots,m}\).%
+			\begin{equation}\label{eq:f-hat}%
+				\begin{tikzcd}
+					A_i \arrow[r,"\pi_i"] \arrow[dr,"\iota_i"] & A_i/B_i \arrow[r,"f_i"] &
+					X\\
+					& A_1 \oplus \ldots \oplus A_m \arrow[ur,"\hat{f}",dashed,swap] & 
+				\end{tikzcd}
+			\end{equation}%
+			where \(\iota_i: A_i \to A_1 \oplus \ldots \oplus A_m\) is the canonical
+			inclusion morphism.  Furthermore \(\iota_i(B_i)\) is contained in the
+			kernel of the map \(A_i \to A_1 \oplus \ldots \oplus A_m \to M\) since
+			\(\iota_i(B_i)\) is a submodule of \(B_1 \oplus \ldots \oplus B_m\).
+			Therefore the universal property of the quotient gives us a unique map
+			\(\rho_i: A_i/B_i \to M\) fitting into the following diagram.%
+			\begin{equation}\label{eq:rho-i}%
+				\begin{tikzcd}
+					A_i \arrow[r,"\pi_i"] \arrow[dr,"\iota_i",swap] & A_i/B_i
+					\arrow[dd,"\exists !  \rho_i",dashed, bend left=100]\\
+					& A_1 \oplus \ldots \oplus A_m \arrow[d] \\
+					& M
+				\end{tikzcd}
+			\end{equation}%
+			Lastly, we show that \(B_1 \oplus \ldots \oplus B_m\) is contained in the
+			kernel of \(\hat{f}\). Note that it suffices to show that \(\iota_i(B_i)\)
+			is contained in the kernel of \(\hat{f}\), because (by definition) \(B_1
+			\oplus \ldots \oplus B_m = \iota_1(B_1) \oplus \ldots \oplus
+			\iota_m(B_m)\). Since \(B_i\) is contained in \(\ker \pi_i \circ f_i\),
+			Diagram~\ref{eq:f-hat} shows that \(\iota_i(B_i)\) is contained in \(\ker
+			\hat{f}\), as desired. Therefore \(B_1 \oplus \ldots \oplus B_m \leq \ker
+			\hat{f}\); hence \(\hat{f}\) itself induces a unique morphism \(\tilde{f}:
+			M \to X\) making the following diagram commute.%
+			\begin{equation}\label{eq:f-tilde}%
+				\begin{tikzcd}
+					A_i \arrow[r,"\pi_i"] \arrow[dr,"\iota_i",swap] & A_i/B_i
+					\arrow[r,"f_i"] & X\\
+					& A_1 \oplus \ldots \oplus A_m \arrow[ur,"\hat{f}",swap] \arrow[d] & \\
+					& M \arrow[uur,"\exists ! \tilde{f}",dashed,swap, bend right=30] &
+				\end{tikzcd}
+			\end{equation}%
+			Using Diagram~\ref{eq:rho-i}, we can replace the left side with
+			\(\rho_i\):%
+			\[%
+				\begin{tikzcd}
+					A_i/B_i \arrow[d,"\rho_i",swap] \arrow[r,"f_i"] & X\\
+					M \arrow[ur,"\exists ! \tilde{f}", dashed, swap] &
+				\end{tikzcd}
+			\]%
+			This is the universal property for the coproduct \(N\). Therefore \(M
+			\cong N\).
+		\end{proof}
+	\end{exercise}
+
+	\begin{exercise}[(DF 12.1.8)]
+		Let \(R\) be a PID, \(B\) a torsion \(R\)-module, and \(p\) a prime element
+		in \(R\). Prove that if \(pb = 0\) for some \(b \in B, b \neq 0\), then
+		\(\Ann(B) \subseteq \pwrap{p}\). (Recall that \(\Ann(B) \eqdef \bwrap{ r
+		\in R \mid r B = 0 }\)).
+
+		\begin{proof}
+			\(R b\) is a submodule of \(B\), so it is a module in its own right. Since
+			\(p b = 0\), \(p \in \Ann(R b)\); hence \(\Ann(R b) \neq \pwrap{0}\).
+			Since \(b \neq 0\), \(1 \cdot b \neq 0\), so \(\Ann(R b)\) is not the unit
+			ideal. Therefore \(\Ann(R b)\) is a nontrivial ideal in the PID \(R\), so
+			\(\Ann(R b)\) is a principal ideal. Since \(p\) is prime, \(\pwrap{p}\) is
+			maximal amoung principal ideals, therefore \(\Ann(R b) = \pwrap{p}\). Any
+			element \(r \in R\) which annihilates all of \(B\) will annihilate \(b\)
+			in particular. Thus \(\Ann(B) \subseteq \Ann(R b)\); hence \(\Ann(B)
+			\subseteq \pwrap{p}\).
+		\end{proof}
+	\end{exercise}
+
+	\begin{exercise}
+		Let \(R\) be a ring with \(1\), not necessarily commutative. Show that if
+		\(I,J \subseteq R\) are left ideals such that \(J = Ia\) for some \(a \in
+		R^\times\), then \(R/I \cong R/J\) as modules.
+
+		\begin{proof}
+			We will show that \(R/I\) satisfies the universal property of \(R/J\).
+			Let \(\phi: R \to N\) be a morphism of \(R\)-modules such that \(J
+			\subseteq \ker \phi\). We define a new morphism \(\overline{\phi}: R/I
+			\to N\) of \(R\)-modules by setting:%
+			\[%
+				\overline{\phi}\pwrap{\overline{x}} \eqdef \phi\pwrap{x a}.
+			\]%
+			To show that this is well-defined, suppose \(y \in I\), so there exists
+			an element \(z \in J\) such that \(y = z a^{-1}\). Then \(y a) = \phi(z)
+			= 0\) since \(z \in \ker \phi\); hence \(\overline{\phi}\) is a
+			well-defined (set)-function from \(R/I\) to \(N\). We now show that
+			\(\overline{\phi}\) is linear:%
+			\[%
+				\overline{\phi}\pwrap{r \overline{x} + s \overline{y}} = \phi\pwrap{
+				\pwrap{ r x + s y } a } = \phi\pwrap{ r x a + s y a } = r\phi(x a) + s
+				\phi(y a) = r \overline{\phi}(\overline{x}) + s
+				\overline{\phi}(\overline{y}).
+			\]%
+			Furthermore we can define an \(R\)-module morphism \(\pi': R \to R/I\) by
+			setting \(\pi'(x) \eqdef \overline{x a^{-1}}\). Since \(J = I a\), \(\ker
+			\pi'\) contains \(J\) (in fact, \(J = I a\) implies \(\ker \pi' = J\)).
+			Moreover, \(\overline{\phi}\pwrap{\pi'(x)} = \phi(x a^{-1} a) =
+			\phi(x)\), so the following triangle commutes.%
+			\[%
+				\begin{tikzcd}%
+					R \arrow[r,"\phi"] \arrow[d,"\pi'",swap] & N\\
+					R/I \arrow[ur,"\overline{\phi}",dotted,swap] &
+				\end{tikzcd}
+			\]%
+			All that is left to check is that \(\overline{\phi}\) is unique. Since
+			\(\pi'\) is surjective, the requirement that \(\overline{\phi} \circ \pi'
+			= \phi\) forces a unique definition for \(\overline{\phi}\).
+
+			Thus \(\pi': R \to R/I\) satisfies the universal property of the quotient
+			\(R/J\). Since quotients are unique up to isomorphism, \(R/I \cong R/J\).
+		\end{proof}
+	\end{exercise}
+
+	\begin{exercise}
+		Let \(R \eqdef M_{2\times 2}(F)\) with \(F\) a field. Find examples of
+		left ideals \(I,J \subseteq R\) such that \(R/I \cong R/J\) as modules but
+		\(I \neq J\).
+
+		\begin{proof}
+			Let \(I\) denote the collection of all matrices \(A \in R\) such that \(A
+			\pwrap{\begin{smallmatrix} 1 \\ 0 \end{smallmatrix}} = 0\), and let \(J\)
+			denote the collection of all matrices \(B \in R\) such that
+			\(B\pwrap{\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}} = 0\).
+
+			\(I\) is a left-ideal: for any \(M_1, M_2 \in R\) and \(A_1,
+			A_2 \in I\),%
+			\[%
+				\pwrap{M_1 A_1 - M_2 A_2}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = M_1
+				\pwrap{ A_1 \begin{pmatrix}1\\0\end{pmatrix} } - M_2 \pwrap{ A_2
+				\begin{pmatrix}1\\0\end{pmatrix} } = 0.
+			\]%
+			A similar argument shows that \(J\) is also a left-ideal. Furthermore,
+			the matrix%
+			\[%
+				\sigma \eqdef \begin{pmatrix}
+					0 & 1 \\
+					1 & 0
+				\end{pmatrix}
+			\]%
+			is an element of \(R^\times\) (it is its own inverse). Since \(I \sigma =
+			J\), Exercise~\ref{ex:4} implies \(R/I \cong R/J\). However, \(I \neq
+			J\): \(\pwrap{\begin{smallmatrix} 0 & 0 \\ 0 & 1 \end{smallmatrix}}\) is
+			an element of \(I\) but not an element of \(J\).
+		\end{proof}
+	\end{exercise}
+
+	\begin{exercise}[(DF 12.2.10)]
+		Find all similarity classes of \(6 \times 6\) matrices over \(\Q\) with
+		minimal polynomial \(\pwrap{x+2}^2\pwrap{x-1}\).
+
+		\begin{warning_box*}
+			It suffices to give all lists of invariant factors and write out some of
+			their corresponding matrices.
+		\end{warning_box*}
+
+		\begin{proof}
+			Let \(P \eqdef \pwrap{x+2}^2\pwrap{x-1}\). Let \(V \eqdef \Q^6\) and \(T:
+			V \to V\) be a matrix with minimal polynomial \(P\). Then \(V_T\)
+			decomposes into a sum%
+			\[%
+				V_T \cong \Q[x]/\pwrap{f_1} \oplus \ldots \oplus \Q[x]/\pwrap{f_k},
+			\]%
+			where \(f_1 \mid f_2 \mid \ldots \mid f_k\) are all monic polynomials.
+			Since the minimal polynomial is the largest invariant factor, \(f_k = P\).
+			Furthermore \(\dim_F V_T = \deg f_1 + \ldots + \deg f_k\). \(\deg f_k =
+			3\), so \(\deg f_1 + \ldots + \deg f_{k-1} = 3\), leaving the following
+			possibilities: \begin{itemize}%
+				\item \(k = 4\) and \(\deg f_1 = \deg f_2 = \deg f_3 = 1\),
+				\item \(k = 3\) and \(\deg f_1 = 1\) and \(\deg f_2 = 2\),
+				\item \(k = 2\) and \(\deg f_1 = 3\).
+			\end{itemize}%
+			Since the invariant factors must divide \(P\), this yields six
+			classes.\begin{enumerate}%
+				\item \(f_1 = f_2 = P\);
+				\item \(f_1 = f_2 = f_3 = x-1\) and \(f_4 = P\);
+				\item \(f_1 = f_2 = f_3 = x+2\) and \(f_4 = P\);
+				\item \(f_1 = x+2\), \(f_2 = \pwrap{x+2}^2\), and \(f_3 = P\);
+				\item \(f_1 = x+2\), \(f_2 = \pwrap{x+2}\pwrap{x-1}\), and \(f_3 = P\);
+				\item \(f_1 = x-1\) and \(f_2 = \pwrap{x+2}\pwrap{x-1}\), and \(f_3 = P\).
+			\end{enumerate}%
+			Any matrix is similar to its rational canonical form, so these six classes
+			correspond bijectively to the collection of similarity classes of
+			\(M_{6\times 6}(\Q)\). The invariant factors determine the rational
+			canonical form of the representative of each similarity class. In the
+			order enumerated above, the following six matrices represent the six
+			similarity classes.%
+			\[%
+				\begin{array}{ccc}%
+					\begin{pmatrix}
+						\begin{matrix}
+							0 & 0 & 4\\
+							1 & 0 & 0\\
+							0 & 1 & -3
+						\end{matrix} & \\
+						& \begin{matrix}
+							0 & 0 & 4\\
+							1 & 0 & 0\\
+							0 & 1 & -3
+						\end{matrix}
+					\end{pmatrix},&
+					\begin{pmatrix}
+						\begin{matrix}
+							1 &  & \\
+							 & 1 & \\
+							 &  & 1
+						\end{matrix} & \\
+						& \begin{matrix}
+							0 & 0 & 4\\
+							1 & 0 & 0\\
+							0 & 1 & -3
+						\end{matrix}
+					\end{pmatrix},&
+					\begin{pmatrix}
+						\begin{matrix}
+							-2 &   &  \\
+							  & -2 &  \\
+							  &   & -2
+						\end{matrix} & \\
+						& \begin{matrix}
+							0 & 0 & 4\\
+							1 & 0 & 0\\
+							0 & 1 & -3
+						\end{matrix}
+					\end{pmatrix},\\[0.5in]
+					\begin{pmatrix}
+						\begin{matrix}
+							-2 &   &  \\
+							  & 0 & -4\\
+							  & 1 & -4
+						\end{matrix} & \\
+						& \begin{matrix}
+							0 & 0 & 4\\
+							1 & 0 & 0\\
+							0 & 1 & -3
+						\end{matrix}
+					\end{pmatrix},&
+					\begin{pmatrix}
+						\begin{matrix}
+							-2 &   &  \\
+							  & 0 & 2\\
+							  & 1 & -1
+						\end{matrix} & \\
+						& \begin{matrix}
+							0 & 0 & 4\\
+							1 & 0 & 0\\
+							0 & 1 & -3
+						\end{matrix}
+					\end{pmatrix},&
+					\begin{pmatrix}
+						\begin{matrix}
+							1 &   &  \\
+							  & 0 & 2\\
+							  & 1 & -1
+						\end{matrix} & \\
+						& \begin{matrix}
+							0 & 0 & 4\\
+							1 & 0 & 0\\
+							0 & 1 & -3
+						\end{matrix}
+					\end{pmatrix}.
+				\end{array}%
+			\]%
+		\end{proof}
+	\end{exercise}
+
+	\begin{exercise}[(DF 12.3.5)]
+		Compute the Jordan canonical form (over \(\C\)) of the matrix%
+		\[%
+			A \eqdef \begin{pmatrix}
+				1 & 0 & 0\\
+				0 & 0 & -2\\
+				0 & 1 & 3
+			\end{pmatrix}.
+		\]%
+		\begin{proof}[Solution]
+			The characteristic polynomial \(\det (\lambda I - A)\) is \(\lambda^2 - 3
+			\lambda + 2 = \pwrap{\lambda - 2}\pwrap{\lambda - 1}\), so the eigenvalues
+			of \(A\) are \(2\) and \(1\). We can directly solve the system \(A - 2 I =
+			0\) and \(A - I = 0\) to find an eigenbasis%
+			\[%
+				\begin{array}{ccc}
+					\begin{pmatrix} 1\\0\\0 \end{pmatrix},&
+					\begin{pmatrix} 0\\-2\\0 \end{pmatrix},&
+					\begin{pmatrix} 0\\1\\-1 \end{pmatrix}.
+				\end{array}
+			\]%
+			Therefore these three vectors form a basis of \(V_A\); hence the Jordan
+			canonical form of \(A\) is%
+			\[%
+				J(A) = \begin{pmatrix}
+					1 & 0 & 0\\
+					0 & 1 & 0\\
+					0 & 0 & 2
+				\end{pmatrix}.
+			\]%
+		\end{proof}
+	\end{exercise}
+
+	\begin{exercise}
+		Let \(R \eqdef \Z\fb{i}\). Classify all finitely generated \(R\)-modules
+		\(M\) with the property that \(5M = 0\).
+
+		\begin{proof}
+			\(R\) is a PID, so due to the elementary divisor composition, any finitely
+			generated \(R\)-module \(M\) is isomorphic to a direct sum of the form:%
+			\[%
+				M \cong R/\pwrap{p_1^{k_1}} \oplus \ldots \oplus R/\pwrap{p_m^{k_m}},
+			\]%
+			where each \(p_i\) is a prime element of \(R\). This decomposition is
+			unique in the sense that \(m\) is unique and the \(p_i^{k_i}\) are unique
+			up to reordering and multiplication by units. Therefore it suffices to
+			classify \(R\)-modules \(M'\) of the form \(R/\pwrap{p^k}\), where \(p\)
+			is a prime element of \(R\) such that \(5 M' = 0\). Since \(R\) is a PID,
+			\(\Ann(M') = \pwrap{r_0}\) for some \(r_0 \in R\). Since \(\pwrap{p^k}\)
+			is an ideal, \(\pwrap{p^k}\) is contained in \(\Ann(M')\), so \(r_0\)
+			divides \(p^k\). That is, \(r_0\) is a power of \(p\). On the other hand
+			\(5 M' = 0\), so \(5 \in \Ann(M') = \pwrap{r_0}\). This shows that \(r_0\)
+			is a \emph{nontrivial} power of \(p\). Furthermore, \(5 =
+			\pwrap{2+i}\pwrap{2-i}\); both of these factors are prime (they are
+			irreducible in a PID). So we have \(\pwrap{2+i}\pwrap{2-i} = p^d a\),
+			where \(0 < d \leq k\) and \(a \in R\). Thus \(d = 1\) and \(p = 2+i\) or
+			\(p = 2-i\). In other words, \(M' \cong R/\pwrap{2+i}\) or \(M' \cong
+			R/\pwrap{2-i}\).
+			
+			Returning to the direct sum \(M\), this tells us that \(M\) is a direct
+			sum of copies of \(M_1 \eqdef R/\pwrap{2+i}\) and \(M_2 \eqdef
+			R/\pwrap{2-i}\). This proves the following classification.
+
+			\begin{proposition}
+				For any finitely generated \(\Z[i]\)-module \(M\) such that \(5 M = 0\),
+				there exist \(d_1,d_2 \in \Z_{\geq 0}\)	such that%
+				\[%
+					M \cong M_1^{d_1} \oplus M_2^{d_2}.
+				\]%
+			\end{proposition}
+		\end{proof}
+	\end{exercise}
+\end{document}
