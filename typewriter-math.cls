@@ -20,9 +20,7 @@
 	decorations, patterns, decorations.pathmorphing%
 }%
 \RequirePackage{mathtools}
-\RequirePackage{amsthm,amsmath,amssymb}
-\RequirePackage{gensymb}
-\RequirePackage[upright]{fourier}
+\RequirePackage{amsthm,amsmath}
 \RequirePackage{faktor}
 \RequirePackage{stackengine}
 
@@ -73,7 +71,8 @@
 	\rhead{\@subtitle}
 	\lhead{\@title}
 	\cfoot{\thepage}
-	\RequirePackage[frenchmath, italic]{mathastext}
+	\RequirePackage[upright]{fourier}
+	\RequirePackage[frenchmath, italic,nosmalldelims]{mathastext}
 }%
 
 % Now useful style macros
@@ -153,7 +152,7 @@
 \providecommand{\Q}{\mathbb{Q}}
 \providecommand{\C}{\mathbb{C}}
 \providecommand{\Z}{\mathbb{Z}}
-\providecommand\op{{\mathsf{op}}}
+\providecommand\op{{\mathit{op}}}
 
 \providecommand\cdsquare[8]{%
   \begin{tikzcd}[ampersand replacement=\&]%
