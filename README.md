@@ -2,4 +2,4 @@
 
 You shouldn't use this.
 
-(based on `apa7.cls`, which has a lovely typewriter option)
+(based on `memoir.cls`, which has a lovely typewriter option)
