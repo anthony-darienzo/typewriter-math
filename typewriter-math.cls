@@ -5,6 +5,9 @@
 \ProcessOptions\relax
 
 \LoadClass[ms]{memoir}
+\setlrmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{1in}{*}{1}
+\checkandfixthelayout
 
 % Customize memoir class
 \chapterstyle{dash}
@@ -25,6 +28,7 @@
 \RequirePackage{stackengine}
 
 \RequirePackage{hyperref}
+\RequirePackage{memhfixc}
 \RequirePackage[shortcuts]{extdash}
 
 \RequirePackage{xcolor}
@@ -36,11 +40,30 @@
 \def\@subtitle{}%
 \def\subtitle#1{\gdef\@subtitle{#1}}
 
+\def\@contact{}%
+\def\contact#1{\gdef\@contact{#1}}
+
+\def\@leftheader{\@title}
+\def\@rightheader{\@subtitle}
+\def\leftheader#1{\gdef\@leftheader{#1}}
+\def\rightheader#1{\gdef\@rightheader{#1}}
+
+\newcommand\makehomeworktitle{%
+	\thispagestyle{empty}
+	\begin{center}%
+		{\LARGE\@title}\\
+		{\LARGE\@subtitle}\\
+		{\large\@author}\\
+		{\large\@contact}\\
+		{\large\@date}\\
+	\end{center}%
+}%
+
 % tikz magic from:
 % https://tex.stackexchange.com/questions/39296/simulating-hand-drawn-lines
 
 \pgfset{
-	/pgf/decoration/randomness/.initial=2,
+	/pgf/decoration/randomness/.initial=5,
 	/pgf/decoration/wavelength/.initial=100
 }
 \pgfdeclaredecoration{sketch}{init}{
@@ -68,8 +91,8 @@
 
 \AtEndPreamble{%
 	\pagestyle{fancy}
-	\rhead{\@subtitle}
-	\lhead{\@title}
+	\rhead{\@rightheader}
+	\lhead{\@leftheader}
 	\cfoot{\thepage}
 	\RequirePackage[upright]{fourier}
 	\RequirePackage[frenchmath, italic,nosmalldelims]{mathastext}
@@ -177,6 +200,12 @@
 
 \def\comment#1{{\color{magenta} [#1]}}
 
+\renewcommand\qedsymbol{\tikz{%
+	\node[xkcd,draw,fill=black] (b) at (0,0) {};
+}}
+
+\def\theexercise{}
+
 \newcounter{exctr}
 \setcounter{exctr}{0}
 \renewcommand\theexctr{\arabic{exctr}}%
@@ -187,6 +216,7 @@
 \refstepcounter{exctr}%
 \label{ex:\theexctr}%
 \addcontentsline{toc}{section}{Exercise \theexctr~#1}%
+\renewcommand\theexercise{Exercise \theexctr~#1}%
 \noindent\textbf{Exercise \theexctr~#1:~}%
 }%
 {%

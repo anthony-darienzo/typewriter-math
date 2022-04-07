@@ -1,11 +1,9 @@
 \documentclass{./typewriter-math}
-\usepackage[margin=1in]{geometry}
 
-%\titlecolor{teal}
 \title{MATH 500}
 \subtitle{Problem Set 10}
 \author{Anthony D'Arienzo}
-%\contact{apd6@illinois.edu}
+\contact{apd6@illinois.edu}
 \date{4 April 2022}
 
 \DeclareMathOperator\Ann{Ann}
@@ -14,7 +12,7 @@
 
 \begin{document}
 	
-	\maketitle%
+	\makehomeworktitle%
 
 	\begin{exercise}[(DF 12.1.6)]
 		Let \(R\) be an integral domain and \(M\) any non-principal ideal of \(R\)
@@ -70,8 +68,8 @@
 			\bwrap{1,\ldots,m}\).%
 			\begin{equation}\label{eq:f-hat}%
 				\begin{tikzcd}
-					A_i \arrow[r,"\pi_i"] \arrow[dr,"\iota_i"] & A_i/B_i \arrow[r,"f_i"] &
-					X\\
+					A_i \arrow[r,"\pi_i"] \arrow[dr,"\iota_i",swap] & A_i/B_i
+					\arrow[r,"f_i"] & X\\
 					& A_1 \oplus \ldots \oplus A_m \arrow[ur,"\hat{f}",dashed,swap] & 
 				\end{tikzcd}
 			\end{equation}%
