@@ -5,7 +5,7 @@ SHELL = /bin/zsh
 TARGET_FILE = typewriter-math.cls
 
 REMOTE = adarienzo@osmium.us.to
-REMOTE_DIR = /home/adarienzo/texmf/tex/latex/typewriter-math/typewriter-math.cls
+REMOTE_DIR = /home/adarienzo/.local/share/texmf/tex/latex/typewriter-math/typewriter-math.cls
 
 local-install:
 	$(info Updating local $(TARGET_FILE))
@@ -15,8 +15,8 @@ local-install:
 
 remote-install:
 	$(info Updating $(TARGET_FILE) on Osmium.)
-	scp -i "$(HOME)/.ssh/id_rsa" ./$(TARGET_FILE) $(REMOTE):/$(REMOTE_DIR)
+	scp -i "$(HOME)/.ssh/id_ecdsa" ./$(TARGET_FILE) $(REMOTE):/$(REMOTE_DIR)
 	$(info Executing texhash on remote:)
-	ssh -t -i "$(HOME)/.ssh/id_rsa" $(REMOTE) "sudo texhash"
+	ssh -t -i "$(HOME)/.ssh/id_ecdsa" $(REMOTE) 'sudo $$(which texhash)'
 
 install: local-install remote-install
